@@ -7,6 +7,29 @@
     "test": "node test.js",
     "example": "node example.js"
   },
+"keywords": [
+  "ai",
+  "llms",
+  "llm",
+  "openai",
+  "anthropic",
+  "tokens",
+    "token-optimization",
+    "prompt-engineering",
+    "chatgpt",
+    "claude"
+  ],
   "author": "Eimen Hamedat",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eimenhmdt/token-saver.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eimenhmdt/token-saver/issues"
+  },
+  "homepage": "https://github.com/eimenhmdt/token-saver#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }
