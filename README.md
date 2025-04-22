@@ -1,54 +1,88 @@
-# TokenSaver
+# Token Saver
 
-A lightweight library to save tokens in AI prompts by removing unnecessary politeness markers, fillers, and redundant phrases.
+Cut polite fluff out of your prompts so you spend less on tokens.
 
-## Installation
+> 04/17/2025: Sam Altman admits that saying "Please" and "Thank You" to ChatGPT is wasting millions of dollars in computing power.
+
+Disclaimer: Only works with English as of now.
+
+## Install
 
 ```bash
-npm install token-saver
+npm i token-saver      # or yarn add token-saver / pnpm add token-saver
 ```
 
-## Usage
+## Quick start
 
-```javascript
+### ESM
+
+```js
+import TokenSaver from "token-saver";
+
+const saver = new TokenSaver();
+const out = saver.process("Please summarise this text, thank you!");
+
+console.log(out.cleaned); // "Summarise this text."
+console.log(out.estimatedTokensSaved); // 3
+```
+
+### CommonJS
+
+```js
 const TokenSaver = require("token-saver");
-
-// Initialize with default options
-const tokenSaver = new TokenSaver();
-
-// Process a prompt
-const result = tokenSaver.process(
-  "Please generate a poem about cats. Thank you!"
-);
-console.log(result.cleaned); // "Generate a poem about cats."
-console.log(result.estimatedTokensSaved); // Number of tokens saved
-
-// Initialize with custom options
-const customSaver = new TokenSaver({
-  removePoliteness: true,
-  removeFillers: false,
-  removeRedundantIntros: true,
-});
 ```
 
-## Configuration Options
+## Options
 
-- `removePoliteness`: Remove please, thank you, etc. (default: true)
-- `removeFillers`: Remove um, uh, well, etc. (default: true)
-- `removeRedundantIntros`: Remove "I was wondering if you could" (default: true)
+| Option                  | Default | What it does                                       |
+| ----------------------- | :-----: | -------------------------------------------------- |
+| `removePoliteness`      | `true`  | kill _please_, _thank you_ and similar niceties    |
+| `removeFillers`         | `true`  | kill _um_, _uh_, _actually_, _well_ …              |
+| `removeRedundantIntros` | `true`  | kill “I was wondering if you could” style prefixes |
+| `tokenCharRatio`        |    4    | char‑per‑token estimate for savings calculation    |
 
-## API
+Pass a partial options object to the constructor:
 
-- `clean(prompt)`: Cleans a prompt by removing unnecessary tokens based on configuration.
-- `tokensSaved(original, cleaned)`: Calculates an estimate of tokens saved.
-- `process(prompt)`: Processes a prompt and returns an object with:
+```js
+new TokenSaver({ removeFillers: false });
+```
 
-- `original`: Original prompt
-- `cleaned`: Cleaned prompt
-- `originalLength`: Length of original
-- `cleanedLength`: Length after cleaning
-- `charsSaved`: Characters saved
-- `estimatedTokensSaved`: Estimated tokens saved
+## API surface
+
+```ts
+clean(prompt: string): string
+process(prompt: string): {
+  original: string;
+  cleaned: string;
+  charsSaved: number;
+  estimatedTokensSaved: number;
+}
+```
+
+Types are shipped in `index.d.ts`.
+
+## CLI one‑liner
+
+```bash
+npx token-saver "Please help me. Thanks!"   # prints "Help me."
+```
+
+_(CLI is just `node -e` sugar; no global install needed.)_
+
+## Why bother
+
+- ChatGPT Turbo is ~4 characters per token. Two polite words can cost 1–2 tokens.
+- Multiply by millions of prompts. Real money.
+- Faster requests, shorter logs.
+
+## Contributing
+
+```bash
+git clone https://github.com/eimenhmdt/token-saver
+cd token-saver
+npm i
+npm test
+```
 
 ## License
 

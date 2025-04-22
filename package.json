@@ -1,19 +1,33 @@
 {
   "name": "token-saver",
   "version": "1.0.0",
-  "description": "Save tokens (and money!) by automatically removing unnecessary words from AI prompts. Strips politeness markers, fillers, and redundant phrases to optimize token usage with LLMs.",
-  "main": "index.js",
-  "scripts": {
-    "test": "node test.js",
-    "example": "node example.js"
+  "description": "Strip polite fluff from AI prompts to cut token use and cost.",
+  "type": "module",
+  "main": "index.cjs",
+  "module": "dist/token-saver.mjs",
+  "exports": {
+    "require": "./dist/token-saver.cjs",
+    "import": "./dist/token-saver.mjs"
   },
-"keywords": [
-  "ai",
-  "llms",
-  "llm",
-  "openai",
-  "anthropic",
-  "tokens",
+  "files": [
+    "dist",
+    "src",
+    "index.cjs",
+    "index.d.ts",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "prepare": "npm run build",
+    "test": "vitest run",
+    "example": "node examples/basic.cjs"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "openai",
+    "anthropic",
+    "tokens",
     "token-optimization",
     "prompt-engineering",
     "chatgpt",
@@ -30,6 +44,11 @@
   },
   "homepage": "https://github.com/eimenhmdt/token-saver#readme",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.40.0",
+    "vitest": "^3.1.2"
   }
 }
