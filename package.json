@@ -1,5 +1,5 @@
 {
-  "name": "token-saver",
+  "name": "@eimen/token-saver",
   "version": "1.0.0",
   "description": "Strip polite fluff from AI prompts to cut token use and cost.",
   "type": "module",

@@ -9,7 +9,7 @@ Disclaimer: Only works with English as of now.
 ## Install
 
 ```bash
-npm i token-saver      # or yarn add token-saver / pnpm add token-saver
+npm i @eimen/token-saver      # or yarn add @eimen/token-saver / pnpm add @eimen/token-saver
 ```
 
 ## Quick start
@@ -17,7 +17,7 @@ npm i token-saver      # or yarn add token-saver / pnpm add token-saver
 ### ESM
 
 ```js
-import TokenSaver from "token-saver";
+import TokenSaver from "@eimen/token-saver";
 
 const saver = new TokenSaver();
 const out = saver.process("Please summarise this text, thank you!");
@@ -29,7 +29,7 @@ console.log(out.estimatedTokensSaved); // 3
 ### CommonJS
 
 ```js
-const TokenSaver = require("token-saver");
+const TokenSaver = require("@eimen/token-saver");
 ```
 
 ## Options
@@ -64,7 +64,7 @@ Types are shipped in `index.d.ts`.
 ## CLI one‑liner
 
 ```bash
-npx token-saver "Please help me. Thanks!"   # prints "Help me."
+npx @eimen/token-saver "Please help me. Thanks!"   # prints "Help me."
 ```
 
 _(CLI is just `node -e` sugar; no global install needed.)_
